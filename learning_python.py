@@ -130,3 +130,144 @@ import math
 
 # print(math.floor(2.7)) # floor of 2.7 is 2 (basically just rounding down)
 
+# answer = input("enter a password, it must have between 3 and 12 character: ") # password validity check excersize
+# if len(answer) < 4 or len(answer) > 11:
+#     print("please enter a name between 3 and 12 character")
+# else:
+#     print("answer looks good")
+
+# secret_number = 3
+# guess_count = 0
+# guess_limit = 3
+# while guess_count < guess_limit:
+#     guess = int(input("Guess: "))
+#     guess_count += 1
+#     if guess == secret_number:
+#         print("you won")
+#         break # break will exit while loop
+# else: # else can also be used for while statements when loop isnt exited with break
+#     print("you lost")
+
+# command = ""
+# car_started = False
+
+# while True: #w hile true is basically a forever loop
+#     command = input("> ").lower() # .lower can be used on inputs directly
+#     if command == "start":
+#         if car_started == False:
+#             print("car started...")
+#             car_started = True
+#         else:
+#             print("car is already started")
+#     elif command == "stop":
+#         if car_started == True:
+#             print("car stopped")
+#             car_started = False
+#         else:
+#             print("car hasnt started yet")
+#     elif command == "help":
+#         print("""
+# start - to start the car
+# stop - to stop the car
+# quit - to quit programm
+# """) # triple quotes will print exactly as is in code to terminal(useful for multiline)
+#     elif command == "quit":
+#         break # exit loop so it doesnt repeat forever
+#     else:
+#         print("I dont understand.")
+
+# for item in "Python": #item = loop variable, this will run for item = P,y,t,h,o,n so it will run 6 times each with item being a different letter
+#     print(item)
+
+# for x in range(4):
+#     for y in range(3): # nested loop for coordinates
+#         print(f"({x}, {y})")
+
+# numbers = [5, 2, 5, 2, 2]
+# for item in numbers:
+#     print(item * "*") # print f shape easily with lists
+
+# number = [1, 4, 2, 14, 756, 3]
+# print(max(number)) # get maximum from list
+
+# matrix = [
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9]
+# ] # 2d list (matrix)
+# print(matrix)
+# print(matrix[1][2]) # print second row, 3rd column
+# for row in matrix: # prints all items after each other
+#     for item in row:
+#         print(item)
+
+# num = [3, 1, 46, 12, 4, 4, 89]
+# num2 = num.copy() # creates num copy
+# num.sort() # sorts list and updates it. (persistent)
+# num.reverse() # reverses the list
+# print(num)
+# print(num2) # prints old list because of copy
+
+# num = [3, 1, 46, 12, 4, 4, 89, 89, 3, 3, 2, 7, 65, 33]
+# unique_num = []
+# for item in num: # official way to do it
+#     if item not in unique_num:
+#         unique_num.append(item)
+
+# print(num)
+# for item in num: # my way to check for duplicates
+#     if num.count(item) > 1:
+#         num.remove(item)
+# num.sort()
+# print(num)
+# print(unique_num)
+
+# coordinates = (13, 54, 12)
+# x = coordinates[0]
+# y = coordinates[1]
+# z = coordinates[2]
+# # both of theese do the same thing one is way more efficient
+# x, y, z = coordinates # can extract data from lists or tuples into multiple variables at once
+# print(x, y, z)
+
+# person = {
+#     "name": "michi meier",
+#     "age": 23,
+#     "is_male": True
+# } # add dictionary like this
+# print(person["name"]) # name must exist otherwise will result in error
+# print(person.get("birthdate", "march 3rd")) # birthday doesnt exist and will just say none or value provided instead of error
+# person["birthdate"] = "june 4th" # change value or add value to dictionary
+# print(person["birthdate"])
+
+# spelled_numbers = {
+#     "1": "one",
+#     "2": "two",
+#     "3": "three",
+#     "4": "four",
+#     "5": "five",
+#     "6": "six",
+#     "7": "seven",
+#     "8": "eight",
+#     "9": "nine",
+#     "0": "zero"
+# } # make dictionary for number
+
+# # numbers_output = ""
+# # numbers_input = input("Phone: ")
+# # for item in numbers_input:
+# #     numbers_output += spelled_numbers.get(item, "!") + " "
+# # print(numbers_output) # print out spelled numbers
+
+# message = input("> ") # add input to message
+# words = message.split(" ") # split message at spaces into a list called words
+
+# emoji_dict = { 
+#     ":)": "😀",
+#     ":(": "☹️"
+# } # define emoji dictionary
+# output = ""
+# for word in words:
+#     output += emoji_dict.get(word, word) + " " # add either just the word or if in emoji dict add emoji to output with a space between
+# print(output)
+
