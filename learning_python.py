@@ -1,8 +1,13 @@
 import math
+import random
+from pathlib import Path
 
+from learning_python_module import divide2
+from learning_python_module import swap_ab
 
+from learning_packages import package
 
-#BEGINNER COURSE 1:
+# #BEGINNER COURSE 1:
 
 # print("Hello World") # print the string hello world
 
@@ -97,17 +102,7 @@ import math
 
 
 
-#TUTORIAL 2
-
-# point1 = Point()
-# point1.x = 10
-# point1.y = 20
-# print(point1.x)
-# point1.draw()
-
-# point2 = Point()
-# point2.x = 1
-# print(point2.x)
+# #TUTORIAL 2
 
 # first = "michi"
 # last = "meier"
@@ -144,7 +139,7 @@ import math
 
 # command = ""
 # car_started = False
-
+# print("help - help menu")
 # while True: #w hile true is basically a forever loop
 #     command = input("> ").lower() # .lower can be used on inputs directly
 #     if command == "start":
@@ -324,14 +319,12 @@ import math
 #     print("Age cannot be 0")
 
 
-# comments can be used to communicate with developers, reminders to fix/clean, or explain why the code is needed
-"""
-This is also a comment, but can be used on multiple lines
-Also try to avoid stating the obvious or adding to many comments
-good comments are why and how
-"""
-
-num = [1, 2, 3, 7]
+# #comments can be used to communicate with developers, reminders to fix/clean, or explain why the code is needed
+# """
+# This is also a comment, but can be used on multiple lines
+# Also try to avoid stating the obvious or adding to many comments
+# good comments are why and how
+# """
 
 # class Point: #pascal naming convention for classes by capitalizing first letter of every word, used to define new types
 #     def move(self): # define methods
@@ -378,3 +371,71 @@ num = [1, 2, 3, 7]
 
 # bob = Person("Bob")
 # bob.talk() # Same with all this
+
+
+
+# class Mammal: # Define class Mammal
+#     def walk(self):
+#         print("walk")
+
+         
+# class Dog(Mammal): # Make Dog inherit methods from Mammal so no repetitions
+#     pass # pass needed because empty class is not good
+
+
+# class Cat(Mammal): # same with cat
+#     def miau(self):
+#         print("miau") # cat specific method so pass isnt needed
+
+
+# dog1 = Dog()
+# dog1.walk()
+# cat1 = Cat()
+# cat1.miau()
+
+#print(divide2(16)) # imported from module
+
+# print(swap_ab(input("Say something: "))) # runs swapping letter a and b function from module
+
+# package.calc_shipping() # run calc_shipping from package
+
+# for i in range(5):
+#     print(random.random()) # random number between 0 and 1
+
+# for i in range(2):
+#     print(random.randint(5, 245)) # random integer between set numbers
+
+# members = ["Michi", "Marcel", "Max", "Hanspeter"]
+
+# print(random.choice(members)) # prints random element from list
+
+
+# class Dice:
+#     def roll():
+#         output = []
+#         for i in range(2):
+#             output.append(random.randint(1, 6))
+#         return tuple(output)
+    
+
+# print(Dice.roll()) # my solution
+
+
+# class DiceOfficial:
+#     def roll(self):
+#         first = random.randint(1, 6)
+#         second = random.randint(1, 6)
+#         return first, second # in class when no [] automataically a tuple so () not needed
+
+
+# dice = DiceOfficial()
+# print(dice.roll()) # official way
+
+# path = Path("/home/felix")
+# file = Path("/home/felix/Desktop/commands.txt")
+# # print(path.exists()) # checks if path exists, and returns as boolean
+# # print(file.read_text()) # reads text from path
+# for file in (path.glob("*.*")):
+#     print(file) # prints all files/dirs containing a dot anywhere
+
+# # other methods: mkdir, rmdir
