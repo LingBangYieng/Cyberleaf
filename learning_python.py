@@ -99,12 +99,6 @@ import math
 
 #TUTORIAL 2
 
-# # class Point: #pascal naming convention for classes by capitalizing first letter of every word
-#     def move(self):
-#         print("move")
-#     def draw(self):
-#         print("draw")
-
 # point1 = Point()
 # point1.x = 10
 # point1.y = 20
@@ -271,3 +265,116 @@ import math
 #     output += emoji_dict.get(word, word) + " " # add either just the word or if in emoji dict add emoji to output with a space between
 # print(output)
 
+# def greet_user(): # define function
+#     print("hi")
+#     print("hello")
+
+
+# print("start")
+# greet_user() # run function
+# print("finish")
+
+# def hoch2(num): # add variable input for function. num = parameters
+#     print(num ** 2)
+
+
+# hoch2(4) # prints 16. 4 = argument
+
+# def multiplier(num1, num2): # 2 parameter
+#     print(num1 * num2)
+
+
+# multiplier(3, 5) # needs 2 positional arguments
+
+# def hello_user(first, last):
+#     print(f"Hi {first} {last}!")
+
+
+# hello_user(last="smith", first="john") # using parameter name makes it usable in whatever orientation
+
+# def adder(num1, num2):
+#     return num1 + num2 # return a value
+
+# result = adder(6,7) # set result to returned value
+# print(result) # print result
+
+# def emoji_translate(input):
+#     words = input.split(" ") # split message at spaces into a list called words
+#     emoji_dict = { 
+#     ":)": "😀",
+#     ":(": "☹️"
+#     } # define emoji dictionary
+#     output = ""
+#     for word in words:
+#         output += emoji_dict.get(word, word) + " " # add either just the word or if in emoji dict add emoji to output with a space between
+#     return output
+    
+
+# terminal_input = input("> ")
+# print(emoji_translate(terminal_input))
+
+# try: # Exceptions can be used if you want errors to not crah programm, try will just try
+#     age = int(input("Age: "))
+#     income = 20000
+#     risk = income / age
+#     print(age)
+# except ValueError: # if error is one of theese exceptions it will run the code in the code block and continue as normal
+#     print("Invalid Value")
+# except ZeroDivisionError:
+#     print("Age cannot be 0")
+
+
+# comments can be used to communicate with developers, reminders to fix/clean, or explain why the code is needed
+"""
+This is also a comment, but can be used on multiple lines
+Also try to avoid stating the obvious or adding to many comments
+good comments are why and how
+"""
+
+num = [1, 2, 3, 7]
+
+# class Point: #pascal naming convention for classes by capitalizing first letter of every word, used to define new types
+#     def move(self): # define methods
+#         print("move")
+#     def draw(self):
+#         print("draw")
+
+
+# point1 = Point()
+# point1.x = 10 # define attributes
+# point1.y = 20
+# print(point1.x)
+# point1.draw()
+
+# point2 = Point()
+# point2.x = 3
+# print(point2.x)
+
+# class Point: #pascal naming convention for classes by capitalizing first letter of every word, used to define new types
+#     def __init__(self, x, y): # self is a refrence to the current object, so Point in this case. This is a constructor used to create an object
+#         self.x = x
+#         self.y = y
+#     def move(self): # define methods
+#         print("move")
+#     def draw(self):
+#         print("draw")
+
+    
+# point = Point(10, 20) # x any y are defined directly
+# point.x = 11 # change x to 11
+# print(point.x)
+# print(point.y)
+
+# class Person: 
+#     def __init__(self, name): # Dont understand this shit
+#         self.name = name
+#     def talk(self):
+#         print(f"Hi, I am {self.name}")
+
+
+# michi = Person("Michi")
+# michi.talk()
+# print(michi.name)
+
+# bob = Person("Bob")
+# bob.talk() # Same with all this
