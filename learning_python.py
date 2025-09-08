@@ -395,7 +395,7 @@ from learning_packages import package
 # cat1 = Cat()
 # cat1.miau()
 
-#print(divide2(16)) # imported from module
+# print(divide2(16)) # imported from module
 
 # print(swap_ab(input("Say something: "))) # runs swapping letter a and b function from module
 
@@ -441,3 +441,14 @@ from learning_packages import package
 #     print(file) # prints all files/dirs containing a dot anywhere
 
 # # other methods: mkdir, rmdir
+
+pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
+
+screen_x, screen_y = 1200, 600 # define width and height to independent variables
+
+screen = pygame.display.set_mode((screen_x, screen_y)) # create window from variables
+
+run = True
+
+while run:
+    
