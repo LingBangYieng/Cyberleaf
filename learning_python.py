@@ -1,5 +1,7 @@
 import math
 import random
+import pygame
+
 from pathlib import Path
 
 from learning_python_module import divide2
