@@ -450,5 +450,13 @@ screen = pygame.display.set_mode((screen_x, screen_y)) # create window from vari
 
 run = True
 
+
 while run:
-    
+    screen.fill((0, 255, 0))
+    pygame.display.update()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+pygame.quit()
