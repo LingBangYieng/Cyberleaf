@@ -18,22 +18,15 @@ while run:
     screen.fill((0, 0, 0))
     pygame.draw.rect(screen, ((255, 255, 255)), player)
     key = pygame.key.get_pressed()
-    player_y = float(player.y)
-    
-    
-    if player.bottom < screen_height:
-        velocity_y += gravity 
-        player.y += velocity_y
-    
-    if player_y + player.height >= screen_height:
-        player_y = screen_height - player.height
-        velocity_y = 0
-        
-
+#    player_y = float(player.y)
     
     if key[pygame.K_w] == True:
         if player.top > 0:
-            player.move_ip(0, -velocity_y)
+            player.move_ip(0, -speed)
+
+    if key[pygame.K_s] == True:
+        if player.bottom < screen_height:
+            player.move_ip(0, speed)
  
     if key[pygame.K_a] == True:
         if player.left > 0:
@@ -45,7 +38,11 @@ while run:
             
     if key[pygame.K_UP] == True:
         if player.top > 0:
-            player.move_ip(0, -velocity_y)
+            player.move_ip(0, -speed)
+        
+    if key[pygame.K_DOWN] == True:
+        if player.bottom < screen_height:
+            player.move_ip(0, speed)
     
     if key[pygame.K_LEFT] == True:
         if player.left > 0:
