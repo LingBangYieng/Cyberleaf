@@ -1,6 +1,7 @@
 import math
 import random
-import pygame
+import pygame, os
+from pygame.locals import *
 
 from pathlib import Path
 
@@ -446,17 +447,25 @@ pygame.init() # initialize pygame components like sound, graphics, fonts, joysti
 
 screen_x, screen_y = 1200, 600 # define width and height to independent variables
 
-screen = pygame.display.set_mode((screen_x, screen_y)) # create window from variables
+screen = pygame.display.set_mode((screen_x, screen_y), pygame.RESIZABLE) # create window from variables
+screen.fill((0, 255, 0))
+
 
 run = True
-
+#print(pygame.display.Info())
 
 while run:
-    screen.fill((0, 255, 0))
-    pygame.display.update()
+    
+    # if pygame.key.get_pressed()[pygame.K_F11]:
+    #     pygame.display.set_mode((screen_x, screen_y), pygame.FULLSCREEN)
 
+
+    #Window.from_display_module().maximize()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
+        
+        screen.fill((0, 255, 0))
+        pygame.display.update()
+        
 pygame.quit()
