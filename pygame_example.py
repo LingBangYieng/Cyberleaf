@@ -10,6 +10,7 @@ screen_width = 1200
 screen_height = 600
 sqr = 50
 screen1 = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
+pygame.display.set_caption("grunig")
 screen2 = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
 player = pygame.Rect((sqr, sqr, sqr, sqr))
 center = screen_height/2 , screen_width/2
@@ -19,13 +20,14 @@ run = True
 player_y = float(player.y)
 menu_change = 1
 switch = 0
-pygame.mouse.set_visible(False)
+currentscreen = screen1
+pygame.mouse.set_visible(True)
 
 
 
 while run:
     
-    pygame.draw.rect(screen1, ((225, 225, 225)), player)
+    pygame.draw.rect(currentscreen, ((225, 225, 225)), player)
     player_pos = player.x, player.y
     key = pygame.key.get_pressed()
 
@@ -37,13 +39,19 @@ while run:
 
 
     if key[pygame.K_m] == True:
-        
+
         if menu_change:
             screen2.fill((255, 0, 0))
+            pygame.draw.rect(screen2, ((225, 225, 225)), player)
+            currentscreen = screen2
             menu_change = 0
         else:
             screen1.fill((0, 0, 255,))
+            pygame.draw.rect(screen1, ((225, 225, 225)), player)
+            currentscreen = screen1
             menu_change = 1
+
+    pygame.display.update()
 
 
     if key[pygame.K_ESCAPE] == True or key[pygame.K_q] == True:
@@ -51,19 +59,19 @@ while run:
        
     if key[pygame.K_F11] == True:
         if fullscreen:
-            screen1 = pygame.display.set_mode((screen_width, screen_height))
+            currentscreen = pygame.display.set_mode((screen_width, screen_height))
             fullscreen = False
             pygame.time.delay(200)
 
         else:
-            screen1 = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+            currentscreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
             fullscreen = True
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
-    pygame.display.update()
+    pygame.display.flip()
 
 pygame.quit()
 
