@@ -1,6 +1,6 @@
 import math
 import random
-import pygame, os
+import pygame, time
 from sys import exit
 import datetime
 
@@ -481,20 +481,24 @@ pygame.init() # initialize pygame components like sound, graphics, fonts, joysti
 screen = pygame.display.set_mode((800, 400)) # create display surface, this is what the player sees, only 1 possible, always visable
 run = True # initialize run variable needed for game loop
 now = datetime.datetime.now() # set variable now to time
+
 pygame.display.set_caption("learning_python") # set windows title to learning_python
 clock = pygame.time.Clock() # set clock variable to pygame Clock object
 
-test_surface = pygame.Surface((10, 10)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
+ground = pygame.Surface((800, 50)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 human = pygame.Surface((400, 100)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 sky = pygame.Surface((800, 400)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 
-test_surface.fill((255, 255, 255)) #fill test_surface with colour
+ground.fill((0, 255, 0)) #fill test_surface with colour
 human = pygame.image.load("graphics/person.png")
 sky = pygame.image.load("graphics/sky.png")
 human_x = 100
 human_y = 100
 sky = pygame.transform.scale(sky, (800, 400))
 fullscreen = False
+prev_time = time.time()
+dt = 0
+vertical_velocity = 0
 
 while run: # run loop while run == True
     for event in pygame.event.get(): # event loop, checking for all events every game loop
@@ -509,26 +513,42 @@ while run: # run loop while run == True
                 fullscreen = False
 
             
+    time_now = time.time()
+    dt = time_now - prev_time
+    prev_time = time_now
+    human_direction = "right"
+
 
     key=pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
-        human_x -= 1
+        human_direction = "left"
+        human_x -= 300 * dt
+        pygame.transform.flip(human, 1, 1)
     if key[pygame.K_RIGHT]:
-        human_x += 1
+        human_direction = "right"
+        human_x += 300 * dt
     if key[pygame.K_UP]:
-        if human_y > 199:
-            human_y -= 150
+        if human_y > 249:
+            vertical_velocity = 1000
 
-        
 
-    if human_y < 200:
-        human_y += 1
-    screen.blit(sky, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords       
-    screen.blit(test_surface, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords
-    screen.blit(human, (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    human_y -= 0.5 * dt * vertical_velocity
+    vertical_velocity -= 1
+
+    if human_y > 249:
+        vertical_velocity = 0
+
     
+    screen.blit(sky, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords       
+    screen.blit(ground, (0, 350)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    if human_direction == "left":
+        screen.blit(pygame.transform.flip(human, 1, 0), (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    else:
+        screen.blit(human, (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
+
+
     pygame.display.update()
-    clock.tick(240) # set fps cap using the method tick
+    clock.tick() # set fps cap using the method tick
 
 pygame.quit() # quit pygame, opposite of pygame.init, so uninitializing everything
 
