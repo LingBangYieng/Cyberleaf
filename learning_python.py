@@ -1,7 +1,8 @@
 import math
 import random
 import pygame, os
-from pygame.locals import *
+from sys import exit
+import datetime
 
 from pathlib import Path
 
@@ -443,29 +444,63 @@ from learning_packages import package
 
 # # other methods: mkdir, rmdir
 
-pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
 
-screen_x, screen_y = 1200, 600 # define width and height to independent variables
+##OWN PYGAME TEST
+# pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
 
-screen = pygame.display.set_mode((screen_x, screen_y), pygame.RESIZABLE) # create window from variables
-screen.fill((0, 255, 0))
+# screen_x, screen_y = 1200, 600 # define width and height to independent variables
+
+# screen = pygame.display.set_mode((screen_x, screen_y), pygame.RESIZABLE) # create window from variables
+# screen.fill((0, 255, 0))
 
 
-run = True
-#print(pygame.display.Info())
+# run = True
+# #print(pygame.display.Info())
 
-while run:
+# while run:
     
-    # if pygame.key.get_pressed()[pygame.K_F11]:
-    #     pygame.display.set_mode((screen_x, screen_y), pygame.FULLSCREEN)
+#     # if pygame.key.get_pressed()[pygame.K_F11]:
+#     #     pygame.display.set_mode((screen_x, screen_y), pygame.FULLSCREEN)
 
 
-    #Window.from_display_module().maximize()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+#     #Window.from_display_module().maximize()
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             run = False
+        
+#         screen.fill((0, 255, 0))
+#         pygame.display.update()
+        
+# pygame.quit()
+
+
+
+##PYGAME TUTORIAL
+
+pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
+screen = pygame.display.set_mode((800,400)) # create display surface, this is what the player sees, only 1 possible, always visable
+run = True # initialize run variable needed for game loop
+now = datetime.datetime.now() # set variable now to time
+pygame.display.set_caption("learning_python") # set windows title to learning_python
+clock = pygame.time.Clock() # set clock variable to pygame Clock object
+
+test_surface = pygame.Surface((100,200)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
+human = pygame.Surface((400,200)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
+test_surface.fill((255, 255, 255)) #fill test_surface with colour
+
+human = pygame.image.load("graphics/person.png")
+
+while run: # run loop while run == True
+    for event in pygame.event.get(): # event loop, checking for all events every game loop
+        if event.type == pygame.QUIT: # if it finds and event of type QUIT it sets run to False which finishes the loop but doesnt start a new one
             run = False
-        
-        screen.fill((0, 255, 0))
-        pygame.display.update()
-        
-pygame.quit()
+            
+    screen.blit(test_surface, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    screen.blit(human, (200, 100)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    pygame.display.update()
+    clock.tick(20) # set fps cap using the method tick
+
+pygame.quit() # quit pygame, opposite of pygame.init, so uninitializing everything
+
+
+exit(print(now.strftime("%y-%m-%d %H:%M:%S:"),"Game successfully closed")) # exit with success message
