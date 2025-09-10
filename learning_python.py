@@ -489,9 +489,14 @@ ground = pygame.Surface((800, 50)) # create regular surface, isnt visable unless
 human = pygame.Surface((400, 100)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 sky = pygame.Surface((800, 400)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 
+
+jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25)
+
+
 ground.fill((0, 255, 0)) #fill test_surface with colour
 human = pygame.image.load("graphics/person.png")
 sky = pygame.image.load("graphics/sky.png")
+
 human_x = 100
 human_y = 100
 sky = pygame.transform.scale(sky, (800, 400))
@@ -499,6 +504,8 @@ fullscreen = False
 prev_time = time.time()
 dt = 0
 vertical_velocity = 0
+human_direction = "right"
+fps = 0
 
 while run: # run loop while run == True
     for event in pygame.event.get(): # event loop, checking for all events every game loop
@@ -514,10 +521,11 @@ while run: # run loop while run == True
 
             
     time_now = time.time()
-    dt = time_now - prev_time
+    dt = time_now - prev_time # dt = time it takes to run 1 frame
     prev_time = time_now
-    human_direction = "right"
+    
 
+    
 
     key=pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
@@ -529,18 +537,22 @@ while run: # run loop while run == True
         human_x += 300 * dt
     if key[pygame.K_UP]:
         if human_y > 249:
-            vertical_velocity = 1000
+            vertical_velocity = 75
 
 
-    human_y -= 0.5 * dt * vertical_velocity
-    vertical_velocity -= 1
+    human_y -= 9.81 * dt * vertical_velocity
+    
+    if vertical_velocity > -300:
+        vertical_velocity -= 255 * dt
 
     if human_y > 249:
         vertical_velocity = 0
 
-    
+    fps = int(1 / dt)
+    text_surface = jersey10.render(f"FPS: {fps}", True, (0, 0, 0))
     screen.blit(sky, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords       
     screen.blit(ground, (0, 350)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    screen.blit(text_surface, (0,0))
     if human_direction == "left":
         screen.blit(pygame.transform.flip(human, 1, 0), (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
     else:
