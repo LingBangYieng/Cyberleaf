@@ -478,6 +478,9 @@ from learning_packages import package
 ##PYGAME TUTORIAL
 
 pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
+info = pygame.display.Info() # get display info and put it in info variable
+print(info)
+screen_width,screen_height = info.current_w, info.current_h # pull screen size
 screen = pygame.display.set_mode((800, 400)) # create display surface, this is what the player sees, only 1 possible, always visable
 run = True # initialize run variable needed for game loop
 now = datetime.datetime.now() # set variable now to time
@@ -493,19 +496,29 @@ sky = pygame.Surface((800, 400)) # create regular surface, isnt visable unless d
 jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25)
 
 
-ground.fill((0, 255, 0)) #fill test_surface with colour
+
+ground.fill((0, 255, 0)) # fill ground with colour
 human = pygame.image.load("graphics/person.png")
 sky = pygame.image.load("graphics/sky.png")
 
 human_x = 100
 human_y = 100
 sky = pygame.transform.scale(sky, (800, 400))
+human = pygame.transform.scale_by(human, ((800 / 800 + 400/ 400) / 2))
+ground = pygame.transform.scale(ground, (800, 50))
+
+
+
+ground_y = 350
 fullscreen = False
 prev_time = time.time()
 dt = 0
 vertical_velocity = 0
 human_direction = "right"
 fps = 0
+resolution_scale = 1
+resolution_scale_y = 1
+resolution_scale_x = 1
 
 while run: # run loop while run == True
     for event in pygame.event.get(): # event loop, checking for all events every game loop
@@ -513,13 +526,38 @@ while run: # run loop while run == True
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_F11 and fullscreen == False:
-                pygame.display.set_mode((800, 400), pygame.FULLSCREEN)
+                resolution_scale = (screen_width / 800 + screen_height / 400) / 2
+                resolution_scale_y = (screen_height / 400)
+                resolution_scale_x = (screen_width / 800)
+                pygame.display.set_mode((screen_width, screen_height), pygame.FULLSCREEN)
                 fullscreen = True
+                sky = pygame.transform.scale(sky, (screen_width, screen_height))
+                human = pygame.transform.scale_by(human, (resolution_scale))
+                ground = pygame.transform.scale(ground, (screen_width, screen_height / 8))
+                ground_y = screen_height - screen_height / 8
+                human_y = human_y * resolution_scale_y
+                human_x = human_x * resolution_scale_x
+                jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25 * int(resolution_scale))
+            
             elif event.key == pygame.K_F11 and fullscreen:
+
+                human_y = human_y / resolution_scale_y
+                human_x = human_x / resolution_scale_x
                 pygame.display.set_mode((800, 400))
                 fullscreen = False
+                sky = pygame.transform.scale(sky, (800, 400))
+                human = pygame.transform.scale_by(human, (1 / (resolution_scale)))
+                ground_y = 350
+                ground = pygame.transform.scale(ground, (800, 50))
+                resolution_scale = 1
+                resolution_scale_y = 1
+                resolution_scale_x = 1
+                jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25 * int(resolution_scale))
+                
 
-            
+
+
+    
     time_now = time.time()
     dt = time_now - prev_time # dt = time it takes to run 1 frame
     prev_time = time_now
@@ -530,28 +568,28 @@ while run: # run loop while run == True
     key=pygame.key.get_pressed()
     if key[pygame.K_LEFT]:
         human_direction = "left"
-        human_x -= 300 * dt
+        human_x -= 300 * dt * resolution_scale
         pygame.transform.flip(human, 1, 1)
     if key[pygame.K_RIGHT]:
         human_direction = "right"
-        human_x += 300 * dt
+        human_x += 300 * dt * resolution_scale
     if key[pygame.K_UP]:
-        if human_y > 249:
-            vertical_velocity = 75
+        if human_y > 249 * resolution_scale_y:
+            vertical_velocity = 75 * resolution_scale_y
 
 
     human_y -= 9.81 * dt * vertical_velocity
     
     if vertical_velocity > -300:
-        vertical_velocity -= 255 * dt
+        vertical_velocity -= 255 * dt * resolution_scale_y
 
-    if human_y > 249:
+    if human_y > 249 * resolution_scale_y:
         vertical_velocity = 0
 
     fps = int(1 / dt)
     text_surface = jersey10.render(f"FPS: {fps}", True, (0, 0, 0))
     screen.blit(sky, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords       
-    screen.blit(ground, (0, 350)) # blit = BLock Image Transfer, put one surface on another, () = coords
+    screen.blit(ground, (0, ground_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
     screen.blit(text_surface, (0,0))
     if human_direction == "left":
         screen.blit(pygame.transform.flip(human, 1, 0), (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
