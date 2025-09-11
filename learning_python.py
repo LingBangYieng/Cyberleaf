@@ -496,7 +496,8 @@ jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25)
 
 
 
-ground.fill((0, 255, 0)) # fill ground with colour
+#ground.fill((0, 255, 0)) # fill ground with colour
+ground = pygame.image.load("graphics/grass.png")
 human = pygame.image.load("graphics/person.png")
 sky = pygame.image.load("graphics/sky.png")
 
