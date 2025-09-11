@@ -557,6 +557,9 @@ while run: # run loop while run == True
                 resolution_scale_x = 1
                 jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25 * int(resolution_scale))
                 
+            elif event.key == pygame.K_q:
+                run = False
+
 
 
 
