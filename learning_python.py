@@ -490,13 +490,13 @@ clock = pygame.time.Clock() # set clock variable to pygame Clock object
 ground = pygame.Surface((800, 50)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 human = pygame.Surface((400, 100)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 sky = pygame.Surface((800, 400)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
-
+test_obstical = pygame.Surface((50, 50)) # create regular surface, isnt visable unless drawn on display surface, multiple possible
 
 jersey10 = pygame.font.Font("graphics/font/Jersey10-Regular.ttf", 25)
 
 
 
-#ground.fill((0, 255, 0)) # fill ground with colour
+test_obstical.fill((0, 255, 0)) # fill ground with colour
 ground = pygame.image.load("graphics/grass.png")
 human = pygame.image.load("graphics/person.png")
 sky = pygame.image.load("graphics/sky.png")
@@ -520,6 +520,7 @@ resolution_scale = 1
 resolution_scale_y = 1
 resolution_scale_x = 1
 
+
 while run: # run loop while run == True
     for event in pygame.event.get(): # event loop, checking for all events every game loop
         if event.type == pygame.QUIT: # if it finds and event of type QUIT it sets run to False which finishes the loop but doesnt start a new one
@@ -533,6 +534,7 @@ while run: # run loop while run == True
                 fullscreen = True
                 sky = pygame.transform.scale(sky, (screen_width, screen_height))
                 human = pygame.transform.scale_by(human, (resolution_scale))
+                test_obstical = pygame.transform.scale_by(test_obstical, (resolution_scale))
                 ground = pygame.transform.scale(ground, (screen_width, screen_height / 8))
                 ground_y = screen_height - screen_height / 8
                 human_y = human_y * resolution_scale_y
@@ -547,6 +549,7 @@ while run: # run loop while run == True
                 fullscreen = False
                 sky = pygame.transform.scale(sky, (800, 400))
                 human = pygame.transform.scale_by(human, (1 / (resolution_scale)))
+                test_obstical = pygame.transform.scale_by(test_obstical, (1 / resolution_scale))
                 ground_y = 350
                 ground = pygame.transform.scale(ground, (800, 50))
                 resolution_scale = 1
@@ -591,6 +594,7 @@ while run: # run loop while run == True
     screen.blit(sky, (0, 0)) # blit = BLock Image Transfer, put one surface on another, () = coords       
     screen.blit(ground, (0, ground_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
     screen.blit(text_surface, (0,0))
+    screen.blit(test_obstical, (30 * resolution_scale_x, 300 * resolution_scale_y)) # blit = BLock Image Transfer, put one surface on another, () = coords  
     if human_direction == "left":
         screen.blit(pygame.transform.flip(human, 1, 0), (human_x, human_y)) # blit = BLock Image Transfer, put one surface on another, () = coords
     else:
