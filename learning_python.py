@@ -478,8 +478,7 @@ from learning_packages import package
 ##PYGAME TUTORIAL
 
 pygame.init() # initialize pygame components like sound, graphics, fonts, joystick, etc
-info = pygame.display.Info() # get display info and put it in info variable
-print(info)
+info = pygame.display.Info() # get display info and put it in info variable00
 screen_width,screen_height = info.current_w, info.current_h # pull screen size
 screen = pygame.display.set_mode((800, 400)) # create display surface, this is what the player sees, only 1 possible, always visable
 run = True # initialize run variable needed for game loop
